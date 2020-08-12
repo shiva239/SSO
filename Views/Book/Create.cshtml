@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+   Layout = "~/Views/Shared/_LibraryHomeView.cshtml";
+}
+
+<h2>Create Book</h2>
+
+@if (ViewBag.message == true)
+{
+    <div class="container" style="background-color:skyblue;">
+        <div class="toast">
+            <div class="toast-body">
+                New Book has been created successfully
+            </div>
+        </div>
+    </div>
+}
+
+<form action="~/Book/Create" method="post">
+    <br /> <br />
+    <div class="form-group row">
+        <label class="col-sm-2">Title</label>
+        <input type="text" id="BookTitle" name="BookTitle" class="form-control  form-control-sm col-sm-4" />
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2">Author Name</label>
+        @Html.DropDownList("AuthorId", (IEnumerable<SelectListItem>)ViewBag.author, "Select Author", new { @class = "form-control  form-control-sm col-sm-4" })
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2">Category </label>
+        @Html.DropDownList("BookCategory", new List<SelectListItem>
+    () {
+    new SelectListItem { Text="Action", Value="Action"} ,
+    new SelectListItem { Text="Drama", Value="Drama"} ,
+    new SelectListItem { Text="Fantacy", Value="Fantacy"} ,
+    new SelectListItem { Text="Fiction", Value="Fiction"} ,
+    new SelectListItem { Text="Thriller", Value="Thriller"}
+    }, "Select Category", new { @class = "form-control  form-control-sm col-sm-4" })
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2">Publish Date</label>
+        <input type="date" id="BookPublishDate" name="BookPublishDate" class="form-control  form-control-sm col-sm-4" value="@DateTime.Now" />
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2">Description</label>
+        <input type="text" id="BookDescr" name="BookDescr" class="form-control  form-control-sm col-sm-4" />
+    </div>
+    <div class="form-group row">
+        @using (Html.BeginForm("FileUpload", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label class="col-sm-2">Upload File</label>
+            <input type="file" id="FilePath" name="FilePath" class="form-control  form-control-sm col-sm-4" />
+        }
+    </div>
+    <br /> <br />
+    <input type="submit" value="Save" class="btn btn-success" />
+    <br /> <br />
+</form>
+
+
+@{
+    <script src="~/Scripts/jquery-3.4.1.min.js">
+        $(document).ready
+            (function () {
+                $(".toast").toast({ delay: 3000 });
+                $(".toast").toast("show");
+            }
+            )
+    </script>
+}

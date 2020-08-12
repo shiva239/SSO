@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron">
+    <h2>Hyderabad Central Library</h2>
+    <p class="lead">Are you looking for ocean of knowledge?  Yes! You are at right place.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Getting started</h3>
+        <p>
+            Check out millions of books on our website or walkin to Central Library and see our awesome staff for any help to find favourite books.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>Welcome to the world of learning</h3>
+        <p></p>
+        <ul class="nav navbar-nav navbar-left">
+            <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+            <li>@Html.ActionLink("Register", "Register", "Account")</li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h3>Do you know?</h3>
+        <p>You can easily find your favourite books using Internet stations in Library.</p>
+        <p>You dont see the book you are looking for?  Send recommendation note to our supporting staff</p>
+    </div>
+</div>

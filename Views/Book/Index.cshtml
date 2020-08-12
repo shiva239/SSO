@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h1>Books Catalog</h1>
+
+<div class="text-right">
+    <button type="button" class="btn btn-info small" onclick="location.href='@Url.Action("Create", "Book")'">
+        Create New Book
+    </button>
+</div>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FilePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookPublishDate)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <a href="#" data-toggle="popover" data-trigger="focus" data-content="@item.BookDescr" >
+            <img src="@Url.Content(item.FilePath)" alt="@item.BookTitle" width="30" height="40"/>
+        </a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BookTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AuthorName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BookCategory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BookPublishDate)
+    </td>
+    <td>
+        <button type="button" class="btn btn-info small" onclick="location.href='@Url.Action("Edit", "Book", new { id = item.BookId })'">
+            Edit
+        </button>
+        <button type="button" class="btn btn-info small" onclick="location.href='@Url.Action("Delete", "Book", new { id = item.BookId })'">
+            Delete
+        </button>
+    </td>
+</tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+
+
+

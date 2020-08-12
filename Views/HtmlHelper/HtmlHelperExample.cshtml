@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "HtmlHelperExample";
+    Layout = null;
+}
+
+<h2>HtmlHelperExample</h2>
+
+<style>
+    .formatclass {
+        font-family: Verdana;
+        font-size: large;
+        font-weight: normal
+    }
+</style>
+
+<script>
+    function alertfunction( int id ) {
+        alert("You have clicked at " + Date.now())
+    }
+</script>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("Name", "Enter Name", new { @class = "formatclass", @onclick = "alertfunction(1)" })
+
+    <br />
+    <br />
+
+    @Html.Label("User List1 :   ", new { @class = "formatclass" });
+
+    @Html.DropDownList("Register", "Select User");
+
+
+    <br />
+    <br />
+
+    @Html.Label("User List2 :   ", new { @class = "formatclass" });
+    @Html.DropDownList("Register", (SelectList)ViewBag.Register, "Select User", new { @class = "formatclass", @onchange = "alertfunction(1)" });
+
+
+    @*
+        <input type="submit" id="btnSubmit" value="Add Student" />
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(function() {
+                    $('#btnSubmit').click(function(event) {
+                        event.preventDefault();
+                        var Student = {
+                            ID: '10001',
+                            Name: 'Shashangka',
+                            Age: 31
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/JqAJAX",
+                            data: JSON.stringify(Student),
+                            dataType: "json"
+                            contentType: 'application/json; charset=utf-8',
+                            success: function(data) {
+                                alert(data.msg);
+                            },
+                            error: function() {
+                                alert("Error occured!!")
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+
+    *@
+
+
+
+}

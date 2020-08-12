@@ -1,0 +1,21 @@
+﻿@model Library.Models.Author
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form action="~/Author/Edit" method="post">
+    <input type="hidden" id="AuthorId" name="AuthorId" value="@Model.AuthorId" contenteditable="false" />
+    <br />
+    <label>Author Name</label>
+    <input type="text" id="AuthorName" name="AuthorName" value="@Model.AuthorName" />
+    <br />
+    <label>Author Location</label>
+    <input type="text" id="AuthorLocation" name="AuthorLocation" value="@Model.AuthorLocation" />
+    <br />
+    <label>Author Description</label>
+    <input type="text" id="AuthorDesc" name="AuthorDesc" value="@Model.AuthorDesc" />
+    <br /><br />
+    <input type="submit" value="Save" class="btn btn-success btn-lg" />
+</form>
