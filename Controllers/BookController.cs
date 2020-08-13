@@ -35,11 +35,16 @@ namespace Library.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Create(Book bookObj)
+        public ActionResult Create(Book bookObj, HttpPostedFileBase FilePath)
         {
             ViewBag.author = new SelectList((IEnumerable<Author>)authDB.GetAuthorsList(), "AuthorId", "AuthorName");
-            bookObj.FilePath = FileUpload(bookObj.FilePath,);
+            string filename = System.IO.Path.GetFileName(FilePath.FileName);
+            string path = System.IO.Path.Combine(Server.MapPath("~/Images"), filename);
+            bookObj.FilePath = path.Replace("C:\\Users\\x-spagidal\\source\\repos\\SSO\\Images\\","~/Images/");
+            FilePath.SaveAs(path);
+
             int i = bookDB.SaveBook(bookObj);
+
             if (i > 0)
             {
                 return RedirectToAction("Index");
@@ -109,7 +114,7 @@ namespace Library.Controllers
                 return Json(false);
             }
         }
-
+/*
         [HttpPost]
         public string FileUpload(HttpPostedFileBase FilePath)
         {
@@ -132,5 +137,17 @@ namespace Library.Controllers
                 return null;
             }
         }
+
+        public ActionResult Index(HttpPostedFileBase fileupload)
+        {
+            string filename = Path.GetFileName(fileupload.FileName);
+            string path = Server.MapPath("~/Images");
+            fileupload.SaveAs(Path.Combine(path, filename));
+            ViewBag.msg = "uploaded successfully";
+
+            return View();
+        }
+ */
+
     }
 }
